@@ -3,7 +3,8 @@ import { QuizContextAPI } from "../context/QuizContext";
 import { questions } from "../Questions";
 
 export default function Quiz() {
-  const { score, setScore, status, setStatus } = useContext(QuizContextAPI);
+  const { score, setScore, status, setStatus, btnColor, setBtnColor } =
+    useContext(QuizContextAPI);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [optionChoosen, setOptionChoosen] = useState("");
 
@@ -19,29 +20,55 @@ export default function Quiz() {
   };
 
   const endOfQuiz = () => {
+    if (questions[currentQuestion].answer === optionChoosen) {
+      setScore(score + 1);
+    }
     setStatus("Finished");
   };
+
+  const changeColor = () => {
+    setBtnColor(!btnColor);
+  };
+
   return (
     <div className="quiz">
       <h2>{questions[currentQuestion].title}</h2>
       <div className="options">
-        <button className="option" onClick={() => chooseOption("A")}>
+        <button
+          className={btnColor === true ? "selected" : ""}
+          onClick={() => {
+            chooseOption("A");
+            changeColor();
+          }}
+        >
           {questions[currentQuestion].options.A}
         </button>
-        <button className="option" onClick={() => chooseOption("B")}>
+        <button
+          className={btnColor === true ? "selected" : ""}
+          onClick={() => {
+            chooseOption("B");
+            changeColor();
+          }}
+        >
           {questions[currentQuestion].options.B}
         </button>
-        <button className="option" onClick={() => chooseOption("C")}>
+        <button onClick={() => chooseOption("C")}>
           {questions[currentQuestion].options.C}
         </button>
-        <button className="option" onClick={() => chooseOption("D")}>
+        <button onClick={() => chooseOption("D")}>
           {questions[currentQuestion].options.D}
         </button>
       </div>
       {currentQuestion === questions.length - 1 ? (
         <button onClick={endOfQuiz}>Finish Quiz</button>
       ) : (
-        <button className="nextBtn" onClick={nextQuestion}>
+        <button
+          className="nextBtn"
+          onClick={() => {
+            nextQuestion();
+            setBtnColor(false);
+          }}
+        >
           Next Question
         </button>
       )}

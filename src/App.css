@@ -20,7 +20,8 @@ body {
 }
 
 .menu,
-.quiz {
+.quiz,
+.endScreen {
   min-width: 500px;
   min-height: 500px;
   display: flex;
@@ -36,7 +37,8 @@ body {
 }
 
 .menu button,
-.quiz button {
+.quiz button,
+.endScreen button {
   outline: 0;
   border: none;
   width: 250px;
@@ -54,7 +56,8 @@ body {
 }
 
 .menu button:hover,
-.quiz button:hover {
+.quiz button:hover,
+.endScreen button:hover {
   box-shadow: inset 300px 0 0 0 #54b3d6;
   color: white;
 }
@@ -76,4 +79,8 @@ body {
   width: 120px;
   font-size: 15px;
   margin: 15px 0;
+}
+
+.selected {
+  background-color: #54b3d6;
 }

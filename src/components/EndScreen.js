@@ -3,12 +3,21 @@ import { QuizContextAPI } from "../context/QuizContext";
 import { questions } from "../Questions";
 
 export default function EndScreen() {
-  const { score } = useContext(QuizContextAPI);
+  const { score, setScore, setStatus } = useContext(QuizContextAPI);
   return (
     <div className="endScreen">
-      <strong>
+      <h2>Your Score :</h2>
+      <p>
         {score} / {questions.length}
-      </strong>
+      </p>
+      <button
+        onClick={() => {
+          setStatus("Main");
+          setScore(0);
+        }}
+      >
+        Start Again
+      </button>
     </div>
   );
 }
